@@ -1,8 +1,8 @@
-#%%
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import solve_ivp
 import sys
+from pathlib import Path
 
 # Define the model
 class Pendulum:
@@ -29,23 +29,23 @@ def test():
     print(dx)
 
 
-#%% adsfa
+#%% simulate all cases
 p=Pendulum(0.25,0.2,0.001)
 if "test" in sys.argv:
     dx=p.rhs(np.array([1,0,0,0]),0)
     print(dx)
-x0=np.array([1,-0.4,0,0])
+x0=np.array([1,-5,0,0])
 tspan=[0,10]
 t=np.linspace(0,10,10000)
 
 # case 1 ahat=a bhat=b epsilon=0.01
-p11=Pendulum(0.25,0.2,0.001)
+p11=Pendulum(0.25,0.2,0.01)
 # case 1 ahat=a bhat=b epsilon=0.1
-p12=Pendulum(0.25,0.2,0.01)
+p12=Pendulum(0.25,0.2,0.1)
 # case 2 ahat=0 bhat=0 epsilon=0.01
-p21=Pendulum(0.25,0.2,0.001,0,0)
+p21=Pendulum(0.25,0.2,0.01,0,0)
 # case 2 ahat=0 bhat=0 epsilon=0.1
-p22=Pendulum(0.25,0.2,0.01,0,0)
+p22=Pendulum(0.25,0.2,0.1,0,0)
 
 sol=solve_ivp(p11.rhs,tspan,x0,t_eval=t);dx11=sol.y
 sol=solve_ivp(p12.rhs,tspan,x0,t_eval=t);dx12=sol.y
@@ -55,8 +55,8 @@ sol=solve_ivp(p22.rhs,tspan,x0,t_eval=t);dx22=sol.y
 #%% Plot
 plt.subplot(2,2,1)
 plt.plot(t,dx11[0,:],"k",label="$x_1$")
-plt.plot(t,dx11[2,:],"--",label=r"$\hat{x}_1\ (\varepsilon=0.001)$")
-plt.plot(t,dx12[2,:],"--",label=r"$\hat{x}_1\ (\varepsilon=0.01)$")
+plt.plot(t,dx11[2,:],"--",label=r"$\hat{x}_1\ (\varepsilon=0.01)$")
+plt.plot(t,dx12[2,:],"--",label=r"$\hat{x}_1\ (\varepsilon=0.1)$")
 plt.xlim(0,0.5)
 plt.ylabel("$x_1$ and Estimates")
 plt.xlabel("time")
@@ -64,31 +64,30 @@ plt.legend()
 
 plt.subplot(2,2,2)
 plt.plot(t,dx11[1,:],"k",label="$x_2$")
-plt.plot(t,dx11[3,:],"--",label=r"$\hat{x}_2\ (\varepsilon=0.001)$")
-plt.plot(t,dx12[3,:],"--",label=r"$\hat{x}_2\ (\varepsilon=0.01)$")
+plt.plot(t,dx11[3,:],"--",label=r"$\hat{x}_2\ (\varepsilon=0.01)$")
+plt.plot(t,dx12[3,:],"--",label=r"$\hat{x}_2\ (\varepsilon=0.1)$")
 plt.xlim(0,0.5)
 plt.ylabel("$x_2$ and Estimates")
 plt.xlabel("time")
 plt.legend()
 
 plt.subplot(2,2,3)
-plt.plot(t,dx21[1,:]-dx21[3,:],"r",label=r"$x_2-\hat{x}_2\ (\varepsilon=0.001)$")
-plt.plot(t,dx22[1,:]-dx22[3,:],"b",label=r"$x_2-\hat{x}_2\ (\varepsilon=0.01)$")
-plt.xlim(0,0.4)
+plt.plot(t,dx21[1,:]-dx21[3,:],"r",label=r"$x_2-\hat{x}_2\ (\varepsilon=0.01)$")
+plt.plot(t,dx22[1,:]-dx22[3,:],"b",label=r"$x_2-\hat{x}_2\ (\varepsilon=0.1)$")
+plt.xlim(0,0.3)
 plt.ylabel("Estimation Error of $x_2$")
 plt.xlabel("time")
 plt.legend()
 
 plt.subplot(2,2,4)
-plt.plot(t,dx21[1,:]-dx21[3,:],"r",label=r"$x_2-\hat{x}_2\ (\varepsilon=0.001)$")
-plt.plot(t,dx22[1,:]-dx22[3,:],"b",label=r"$x_2-\hat{x}_2\ (\varepsilon=0.01)$")
+plt.plot(t,dx21[1,:]-dx21[3,:],"r",label=r"$x_2-\hat{x}_2\ (\varepsilon=0.01)$")
+plt.plot(t,dx22[1,:]-dx22[3,:],"b",label=r"$x_2-\hat{x}_2\ (\varepsilon=0.1)$")
 plt.xlim(5,10);plt.ylim(-0.04,0.04)
 plt.ylabel("Estimation Error of $x_2$")
 plt.xlabel("time")
 plt.legend()
 
 plt.tight_layout()
-plt.savefig("main.pdf")
-plt.show()
+plt.savefig("highgain.pdf", transparent = True)
 # %%
 # %%

@@ -18,11 +18,11 @@ class Pendulum:
         u0=self.control(x1,x2)
         du=1/0.1*(u0-u)
         #TODO: Should we use the filtered u as control input? 
-        # The textbook only discuss the filtered u
-        # but the simulation shows that
-        # if the filtered u is used the chattering will still exists
-        # and the chattering is even worse than the unfiltered u (u0)
-        # So, here I use u0 instead of u
+        # The textbook only discusses the filtered u and doesn't mention 
+        # whether we should use the filtered u in simulation or not.
+        # From simulation, we can see the chattering phenomenon still exists
+        # and even worse when use the filtered u 
+        # change u0 to u in the next line to see the difference
         dx2=-np.cos(x1)-self.b*x2+self.c*u0
         return np.array([dx1,dx2,du])
     def control(self,x1,x2):

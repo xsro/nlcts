@@ -79,5 +79,5 @@ plt.ylabel("Filtered $u$")
 plt.xlabel("time")
 
 plt.tight_layout()
-plt.savefig("basic.pdf", transparent = True)
+plt.savefig("SMC.pdf", transparent = True)
 #%%

@@ -11,7 +11,9 @@ PIPENV_ENV["PIPENV_VERBOSITY"]="-1"
 PDF_OUT=Path(__file__).parent.joinpath("out")
 PDF_OUT.mkdir(exist_ok=True)
 
-files=glob.glob('**/**/main*.py')
+GLOBFILE=sys.argv[1] if len(sys.argv)>1 else "**/**/main*.py"
+
+files=glob.glob(GLOBFILE)
 for file in files:
     pybin=Path(sys.orig_argv[0])
     pyscript=Path(file)

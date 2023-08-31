@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "27aa200e6505820e67e4e54ad05e892d94fcb29e4cdb4e82411e5e0e168ba10b"
+            "sha256": "2f03d7258167a02bb3789fff7509d613868ac9016dd378775646cb7929084844"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -206,11 +206,11 @@
         },
         "jupyter-client": {
             "hashes": [
-                "sha256:3af69921fe99617be1670399a0b857ad67275eefcfa291e2c81a160b7b650f5f",
-                "sha256:7441af0c0672edc5d28035e92ba5e32fadcfa8a4e608a434c228836a89df6158"
+                "sha256:5eb9f55eb0650e81de6b7e34308d8b92d04fe4ec41cd8193a913979e33d8e1a5",
+                "sha256:60294b2d5b869356c893f57b1a877ea6510d60d45cf4b38057f1672d85699ac9"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==8.3.0"
+            "version": "==8.3.1"
         },
         "jupyter-core": {
             "hashes": [
@@ -384,6 +384,13 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.1.6"
+        },
+        "mpmath": {
+            "hashes": [
+                "sha256:7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f",
+                "sha256:a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c"
+            ],
+            "version": "==1.3.0"
         },
         "nest-asyncio": {
             "hashes": [
@@ -918,6 +925,16 @@
                 "sha256:cbb2a53eb64e5785878201a97ed7c7b94883f48b87bfb0bbe8b623c74679e4a8"
             ],
             "version": "==0.6.2"
+        },
+        "sympy": {
+            "hashes": [
+                "sha256:0844fc93e7ae9171656c2c9a6e344c65afd7ff6de262567830753f9c6abb5a6d",
+                "sha256:5faae0c0f5bb83ea2e07a7f72c9881eb451c5da7ccf6f71bd01891c129ae80d7",
+                "sha256:c3588cd4295d0c0f603d0f2ae780587e64e2efeedb3521e46b9bb1d08d184fa5",
+                "sha256:ebf595c8dac3e0fdc4152c51878b498396ec7f30e7a914d6071e674d49420fb8"
+            ],
+            "index": "pip_conf_index_global",
+            "version": "==1.12"
         },
         "tornado": {
             "hashes": [

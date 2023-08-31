@@ -1,8 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import solve_ivp
-import sys
-from pathlib import Path
 
 # Define the model
 class Pendulum:

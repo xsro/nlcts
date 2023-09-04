@@ -7,7 +7,7 @@ import os
 import argparse
 
 parser = argparse.ArgumentParser(description='script to run all simulation and save figures')
-parser.add_argument("--glob",type=str,default="**/**/main*.py",help="glob pattern to find main.py")
+parser.add_argument("--glob",type=str,default="**/**/*.py",help="glob pattern to find main.py")
 parser.add_argument("--outpath",type=str,default=r"\\wsl.localhost\Ubuntu-22.04\home\xsr\repo\nlct\simu",help="path to copy all figures to")
 parser.add_argument("--no-copy",action="store_true",help="do not copy figures to outpath")
 parser.add_argument("--no-run",action="store_true",help="do not run simulation")

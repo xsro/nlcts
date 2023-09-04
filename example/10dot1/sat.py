@@ -44,16 +44,16 @@ x0=Pendulum.output_to_state(theta0,dtheta0)
 p1=Pendulum(b,c,0.1)
 p2=Pendulum(b,c,0.001)
 #%%
-sol=solve_ivp(p1.rhs1,[0,10],np.array([*x0,0,0]))
+sol1=solve_ivp(p1.rhs1,[0,10],np.array([*x0,0,0]))
 sol2=solve_ivp(p2.rhs1,[0,10],np.array([*x0,0,0]))
-sol=solve_ivp(p1.rhs2,[0,10],np.array([*x0,0,0]))
-sol2=solve_ivp(p2.rhs2,[0,10],np.array([*x0,0,0]))
+sol3=solve_ivp(p1.rhs2,[0,10],np.array([*x0,0,0]))
+sol4=solve_ivp(p2.rhs2,[0,10],np.array([*x0,0,0]))
 
 #%%
 plt.subplot(2,2,1)
-(theta,dtheta)=Pendulum.state_to_output(sol.y[0,:],sol.y[1,:])
+(theta,dtheta)=Pendulum.state_to_output(sol1.y[0,:],sol1.y[1,:])
 (theta2,dtheta2)=Pendulum.state_to_output(sol2.y[0,:],sol2.y[1,:])
-plt.plot(sol.t,theta,"--",label="$\\mu=0.1$")
+plt.plot(sol1.t,theta,"--",label="$\\mu=0.1$")
 plt.plot(sol2.t,theta2,label="$\\mu=0.001$")
 plt.legend()
 plt.ylabel("$\\theta$")
@@ -63,9 +63,9 @@ plt.grid(axis="y")
 plt.title("(a)")
 
 plt.subplot(2,2,2)
-s=sol.y[0,:]+sol.y[1,:]
+s=sol1.y[0,:]+sol1.y[1,:]
 s2=sol2.y[0,:]+sol2.y[1,:]
-plt.plot(sol.t,s,"--",label="$\\mu=0.1$")
+plt.plot(sol1.t,s,"--",label="$\\mu=0.1$")
 plt.plot(sol2.t,s2,label="$\\mu=0.001$")
 plt.legend()
 plt.ylabel("$s$")
@@ -76,10 +76,10 @@ plt.grid(axis="y")
 plt.title("(b)")
 
 plt.subplot(2,2,3)
-(theta,dtheta)=Pendulum.state_to_output(sol.y[0,:],sol.y[1,:])
-(theta2,dtheta2)=Pendulum.state_to_output(sol2.y[0,:],sol2.y[1,:])
-plt.plot(sol.t,theta,"--",label="$\\mu=0.1$")
-plt.plot(sol2.t,theta2,label="$\\mu=0.001$")
+(theta,dtheta)=Pendulum.state_to_output(sol3.y[0,:],sol3.y[1,:])
+(theta2,dtheta2)=Pendulum.state_to_output(sol4.y[0,:],sol4.y[1,:])
+plt.plot(sol3.t,theta,"--",label="$\\mu=0.1$")
+plt.plot(sol4.t,theta2,label="$\\mu=0.001$")
 plt.legend()
 plt.ylabel("$\\theta$")
 plt.xlabel("time")
@@ -88,10 +88,10 @@ plt.grid(axis="y")
 plt.title("(c)")
 
 plt.subplot(2,2,4)
-s=sol.y[0,:]+sol.y[1,:]
-s2=sol2.y[0,:]+sol2.y[1,:]
-plt.plot(sol.t,s,"--",label="$\\mu=0.1$")
-plt.plot(sol2.t,s2,label="$\\mu=0.001$")
+s=sol3.y[0,:]+sol3.y[1,:]
+s2=sol4.y[0,:]+sol4.y[1,:]
+plt.plot(sol3.t,s,"--",label="$\\mu=0.1$")
+plt.plot(sol4.t,s2,label="$\\mu=0.001$")
 plt.legend()
 plt.ylabel("$s$")
 plt.xlabel("time")

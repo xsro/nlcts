@@ -9,7 +9,7 @@ import argparse
 parser = argparse.ArgumentParser(description='script to run all simulation and save figures')
 parser.add_argument("--glob",type=str,default="**/**/*.py",help="glob pattern to find main.py")
 parser.add_argument("--outpath",type=str,default=r"\\wsl.localhost\Ubuntu-22.04\home\xsr\repo\nlct\simu",help="path to copy all figures to")
-parser.add_argument("--no-copy",action="store_true",help="do not copy figures to outpath")
+parser.add_argument("--overwrite",action="store_true",help="overwrite to outpath")
 parser.add_argument("--no-run",action="store_true",help="do not run simulation")
 args = parser.parse_args()
 
@@ -37,7 +37,8 @@ for file in files:
         run(["pipenv","run","python",pyscript.absolute()],env=PIPENV_ENV,cwd=pyscript.parent)
     for pdf in glob.glob("*.pdf",root_dir=pyscript.parent):
         filename="_".join(list(pyscript.parts)[0:2]+[pdf])
-        if not args.no_copy:
-            print("\tcopying",pdf)
-            shutil.copy(pyscript.parent.joinpath(pdf),OUTPATH.joinpath(filename))
-            shutil.copy(pyscript.parent.joinpath(pdf),PDF_OUT.joinpath(filename))
+        print("\tcopying",pdf)
+        outside_dest=OUTPATH.joinpath(filename)
+        if not outside_dest.exists() or args.overwrite:
+            shutil.copy(pyscript.parent.joinpath(pdf),outside_dest)
+        shutil.copy(pyscript.parent.joinpath(pdf),PDF_OUT.joinpath(filename))

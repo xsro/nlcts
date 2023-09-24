@@ -9,6 +9,7 @@ matplotlib = "*"
 numpy = "*"
 ipykernel = "*"
 sympy = "*"
+pexpect = "*"
 
 [dev-packages]
 

@@ -1,4 +1,4 @@
-# %%
+# %% a sphere without north pole S^2/N is homeomorphic to R^2
 import numpy as np
 import matplotlib.pyplot as plt
 

@@ -8,6 +8,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='script to run all simulation and save figures')
 parser.add_argument("--glob",type=str,default="**/**/*.py",help="glob pattern to find main.py")
+parser.add_argument("--filter",type=str,default="",help="include only filename with this")
 parser.add_argument("--outpath",type=str,default=r"\\wsl.localhost\Ubuntu-22.04\home\xsr\repo\nlct\simu",help="path to copy all figures to")
 parser.add_argument("--overwrite",action="store_true",help="overwrite to outpath")
 parser.add_argument("--no-run",action="store_true",help="do not run simulation")
@@ -27,6 +28,8 @@ OUTPATH=Path(args.outpath)
 
 files=glob.glob(GLOBFILE)
 for file in files:
+    if len(args.filter)>0 and args.filter not in file:
+        continue
     pybin=Path(sys.orig_argv[0])
     pyscript=Path(file)
     if args.no_run:

@@ -1,3 +1,5 @@
+mod common;
+
 mod euler2;
 mod rk4;
 pub mod matlab;

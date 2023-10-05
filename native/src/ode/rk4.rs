@@ -1,20 +1,20 @@
 use std::vec;
 use num::Float;
 use ndarray::Array1;
-use std::collections::BTreeMap;
+use super::common::SignalCollection;
 
 pub struct RK4<T,F>
 {
     pub step_size:T,
     pub states:Vec<Array1<T>>,
     pub times:Vec<T>,
-    pub signals:Vec<Option<BTreeMap<String,T>>>,
+    pub signals:Vec<Option<SignalCollection<T>>>,
     pub state_changes:Vec<Array1<T>>,
     rhs:F,
 }
 
 impl<T:Float+ndarray::ScalarOperand,F> RK4<T,F>
-where F:for<'a> FnMut(&'a T,&'a Array1<T>)->(Array1<T>,Option<BTreeMap<String,T>>)
+where F:for<'a> FnMut(&'a T,&'a Array1<T>)->(Array1<T>,Option<SignalCollection<T>>)
 {
     pub fn new(rhs:F,initial:Array1<T>,step_size:T)->Self{
         Self{

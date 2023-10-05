@@ -1,5 +1,6 @@
 mod utils;
 pub mod ode;
+pub mod lf;
 
 use wasm_bindgen::prelude::*;
 

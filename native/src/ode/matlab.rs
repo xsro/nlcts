@@ -4,12 +4,7 @@ use ndarray::Array1;
 use num::Float;
 use super::{RK4,Euler};
 
-pub fn collect_ode_result<T>(
-    t:Vec<T>,states:Vec<Array1<T>>,
-    signals:Vec<Option<BTreeMap<String,T>>>
-){
 
-}
 
 
 pub fn ode2<T,F>(rhs:F,t:Array1<T>,initial:Array1<T>)->Result<(),String>

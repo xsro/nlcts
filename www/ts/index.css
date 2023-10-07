@@ -1,0 +1,52 @@
+body {
+  /* position: absolute;*/
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.simulation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.figure {
+  position: relative;
+}
+
+.figure .katex-html {
+  color: grey;
+}
+
+.figure canvas {
+  /* position: absolute; */
+  z-index: 1;
+  background-color: #f0f0f0;
+}
+
+.figure .t {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  z-index: 2;
+}
+.figure .right-top {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  z-index: 2;
+}
+
+.figure .left-bottom {
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+  z-index: 2;
+}

@@ -1,0 +1,6 @@
+pkg
+out
+node_modules
+dist
+v1
+ts/config.ts

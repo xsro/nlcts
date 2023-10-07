@@ -1,9 +1,30 @@
 use std::collections::BTreeMap;
-use ndarray::{Array1,Array2};
+use ndarray::{Array1,Array2,ScalarOperand};
 use num::Float;
 
 pub type SignalCollection<T>=BTreeMap<String,T>;
+pub trait FloatScalar:Float+ScalarOperand{}
+impl FloatScalar for f32{}
+impl FloatScalar for f64{}
 
+// trait alias is not ready yet so we just define the input type here
+pub struct RHSInput<'a,T:FloatScalar>{
+    pub t:&'a T,
+    pub x:&'a Array1<T>,
+}
+
+impl<'a,T:FloatScalar> RHSInput<'a,T>{
+    pub fn new(t:&'a T,x:&'a Array1<T>)->Self{
+        Self{t,x}
+    }
+}
+
+// trait alias is not ready yet so we just define the return type here
+pub struct RHSOutput<T:FloatScalar>{
+    pub dxdt:Array1<T>,
+    pub signals:Option<SignalCollection<T>>,
+}
+pub type RHSResult<T>=Result<(Array1<T>,Option<SignalCollection<T>>),String>;
 
 pub fn collect_ode_result<T:Float>(
     t:Vec<T>,states:Vec<Array1<T>>,

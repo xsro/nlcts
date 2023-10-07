@@ -1,4 +1,6 @@
 mod utils;
+mod plant;
+mod config;
 pub mod ode;
 pub mod lf;
 
@@ -12,4 +14,9 @@ extern "C" {
 #[wasm_bindgen]
 pub fn greet() {
     alert("Hello, nlct!");
+}
+
+#[wasm_bindgen]
+pub fn nlct(){
+
 }

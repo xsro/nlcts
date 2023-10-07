@@ -1,22 +1,10 @@
 mod utils;
 mod plant;
 mod config;
+mod graph;
 pub mod ode;
 pub mod lf;
 
-use wasm_bindgen::prelude::*;
+mod web;
 
-#[wasm_bindgen]
-extern "C" {
-    fn alert(s: &str);
-}
 
-#[wasm_bindgen]
-pub fn greet() {
-    alert("Hello, nlct!");
-}
-
-#[wasm_bindgen]
-pub fn nlct(){
-
-}

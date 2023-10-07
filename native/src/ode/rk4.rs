@@ -1,6 +1,6 @@
 use std::vec;
 use ndarray::Array1;
-use super::common::{RHSInput,RHSOutput,FloatScalar};
+use super::common::{RHSInput,RHSOutput,FloatScalar,ODE};
 
 pub struct RK4<T:FloatScalar,F>
 {
@@ -66,6 +66,23 @@ where F:for<'a> FnMut(RHSInput<'a,T>)->RHSOutput<T>
         self.states.push(xn1);
         self.init_or_finish_step();
         
+    }
+}
+
+impl<T:FloatScalar,F> ODE<T> for RK4<T,F>
+where F:for<'a> FnMut(RHSInput<'a,T>)->RHSOutput<T>
+{
+    fn step(&mut self){
+        self.step();
+    }
+    fn get_states(&self)->&Vec<Array1<T>>{
+        &self.states
+    }
+    fn get_times(&self)->&Vec<T>{
+        &self.times
+    }
+    fn get_signals(&self)->&Vec<RHSOutput<T>>{
+        &self.signals
     }
 }
 

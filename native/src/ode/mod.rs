@@ -1,4 +1,4 @@
-mod common;
+pub mod common;
 
 mod euler2;
 mod rk4;

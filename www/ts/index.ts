@@ -1,61 +1,65 @@
-import GUI from 'lil-gui';
-import { Render } from './interface.js';
-import { test } from './test.js';
+import * as ace from "ace-builds"
+import "ace-builds/src-noconflict/theme-monokai"
+import "ace-builds/src-noconflict/mode-javascript"
 
-const gui = new GUI();
+import * as nlct from "nlct"
 
-enum Profile{
-  empty=0,
-  JustRender=1,
-}
+import Plotly from 'plotly.js-dist-min'
 
-const guiConfig = {
-  profile:0,
-	myBoolean: true,
-	myFunction: function() {  },
-	myString: 'lil-gui',
-	myNumber: 1
+
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.session.setMode("ace/mode/javascript");
+editor.setOption("useWorker", false);
+
+(window as any).ode_rhs=function (t:number,x:number[]):number[]{
+    let rhsText=editor.getValue();
+    let custom_rhs=new Function("t","x",rhsText+"return rhs(t,x).dxdt");
+    return custom_rhs(t,x);
 };
 
-gui.add( guiConfig, 'profile', {
-  "empty": Profile.empty,
- } );
+let simulation_index=0;
 
+(window as any).simulation_run=function(realtime:boolean){
+    let id=++simulation_index;
+    let rhsText=editor.getValue();
+    let opt=new Function("t","x",rhsText+"return odeOption;")();
+    let s=nlct.ode4_r(opt.tstep,Float64Array.from(opt.x0));
 
-async function render(profile:Profile,p:HTMLDivElement,gui:GUI){
-  if (profile==Profile.empty){
-    const r=new Render(p,gui)
-    r.bind()
-  }
-}
+    const datas:{[id:string]:number[]}={};
+    const iid=setInterval(()=>{
+        if (id!=simulation_index) clearInterval(iid);
+        s.step()
+        let last=s.last_data();
+        let names=last.names().split(",");
+        let data=last.data();
+        for (let i=0;i<names.length;i++){
+            if(datas[names[i]]==undefined) {
+                datas[names[i]]=[]
+            }
+            else{
+                datas[names[i]].push(data[i]);
+            }
+        }
+        let plot_data = [];
+        for (let name in datas){
+            if(name==="simtime") continue;
+            plot_data.push({
+                x:datas['simtime'],
+                y:datas[name],
+                name:name,
+            });
+        }
 
+        let layout = {
+            title:'all signals',
+        };
 
-async function main(){
-  const p=document.getElementsByClassName("playground")[0] as HTMLDivElement
-  if(p===undefined) throw new Error("Canvas not found")
+        Plotly.newPlot('inspector', plot_data, layout);
+    },
+    realtime?opt.tstep*1000:undefined)
+};
 
-  const url=window.location.href
-  const searchparams=new URL(url).searchParams
-  let profile=Profile.empty
-  if (searchparams.has("profile")){
-    try{
-      profile=parseInt(searchparams.get("profile") as string)
-    }catch{
-      console.log("searchparams ignored",searchparams.get("profile"))
-    }
-  }
-
-  render(profile,p,gui)
-  let lastProfile:undefined|Profile=undefined
-  gui.onFinishChange(event=>{
-    const profile=(event.object as typeof guiConfig)["profile"]
-    if(lastProfile!==profile){
-      p.style.background="gray"
-      lastProfile=profile
-      render(profile,p,gui)
-    }
-  })
-}
-
-test()
-main()
+(window as any).simulation_stop=function(){
+    simulation_index++;
+};

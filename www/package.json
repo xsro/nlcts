@@ -4,7 +4,8 @@
         "ci": "node dev.js && tsc -p . && vite build --base masweb",
         "dev": "vite",
         "build": "tsc -p . && vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "ghpages": "npx gh-pages -d dist"
     },
     "type": "module",
     "devDependencies": {

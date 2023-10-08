@@ -5,10 +5,12 @@ export function test(){
 
     (window as any).ode_rhs=function(x:number[],t:number){
         console.log(x,t)
-        return x
+        let dxdt=[x[1],-x[0]]
+        return dxdt
     }
     let s=nlct.ode4_r(0.1,Float64Array.from([1,2]));
     s.step()
+    console.log(s.last_data())
     debugger
     test1();
 }

@@ -22,6 +22,12 @@ ndarray = "0.15.6"
 num = "0.4.1"
 js-sys = "0.3.64"
 
+[dependencies.web-sys]
+version = "0.3"
+features = [
+  "console"
+]
+
 [dev-dependencies]
 wasm-bindgen-test = "0.3.34"
 

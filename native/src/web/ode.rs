@@ -3,6 +3,7 @@ use crate::ode::{RK4 as Solver, RHSInput,RHSOutput,matlab};
 use ndarray::{Array1, Array2};
 use crate::config::float;
 use wasm_bindgen::prelude::*;
+use web_sys::console;
 
 #[wasm_bindgen]
 pub struct Result{
@@ -85,6 +86,7 @@ pub fn ode4_r(step_size:float,x0:Vec<float>)->Result{
         let t=i.t.clone();
         let x=i.x.to_vec();
         let out=ode_rhs(t,x);
+        console::log_1(&JsValue::from_str(&format!("t: {}, x: {:?}, out: {:?}",t,"",out)));
         RHSOutput { dxdt: Array1::from_vec(out), signals: None }
     };
     let solver=Solver::new(rhs,Array1::from_vec(x0),step_size);

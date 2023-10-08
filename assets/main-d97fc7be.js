@@ -4609,7 +4609,7 @@ let odeOption={
 }
 
 //define the right hand side of the ode equation here
-function rhs(t,x):{dxdt} {
+function rhs(t,x) {
     let x1=x[0],x2=x[1];
     let r=Math.sin(t/3);
     let dr=Math.cos(t/3)/3;

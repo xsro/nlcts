@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Ode playground</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <style>
+
+    #editor { 
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 50%;
+    }
+    #inspector { 
+        position: absolute;
+        top: 40%;
+        left: 0;
+        bottom: 0;
+        right: 50%;
+    }
+  </style>
+  <script type="module" crossorigin src="/nlcts/assets/main-4b0f9b5e.js"></script>
+</head>
+
+<body>
+  
+  
+  <h1>ODE playground</h1>
+  <p>ode equation defined on the right editor will be simulated with rk4 method </p>
+  
+  <button type="button" onclick="simulation_run(false)">simulate(fast)</button>
+  <button type="button" onclick="simulation_run(true)">simulate(real time)</button>
+  <button type="button" onclick="simulation_stop()">stop</button>
+
+  <div id="inspector"></div>
+  <div id="editor"></div>
+
+</body>
+
+</html>

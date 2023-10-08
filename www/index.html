@@ -31,18 +31,7 @@
   <button type="button" onclick="simulation_run(true)">simulate(real time)</button>
   <button type="button" onclick="simulation_stop()">stop</button>
   <div id="inspector"></div>
-    <div id="editor">
-//set initial state, step size and other options here
-let odeOption={
-  x0:[1],
-  tstep:0.01,
-}
-
-//define the right hand side of the ode equation here
-function rhs(t,x) {
-  dxdt=[0.5*x*(1-x/10)];
-  return {dxdt};
-}</div>
+  <div id="editor"></div>
 
 </body>
 

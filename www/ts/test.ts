@@ -1,6 +1,19 @@
 import * as nlct from "nlct"
 
 export function test(){
+    
+
+    (window as any).ode_rhs=function(x:number[],t:number){
+        console.log(x,t)
+        return x
+    }
+    let s=nlct.ode4_r(0.1,Float64Array.from([1,2]));
+    s.step()
+    debugger
+    test1();
+}
+
+function test1(){
     let s=nlct.concensus();
     s.step()
     let data=s.last_data();
@@ -17,6 +30,5 @@ export function test(){
         }
         console.table(data_object)
     }
-    setInterval(call,1000)
-    
+    setInterval(call,1000);
 }

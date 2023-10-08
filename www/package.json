@@ -3,7 +3,7 @@
     "scripts": {
         "ci": "node dev.js && tsc -p . && vite build --base masweb",
         "dev": "vite",
-        "build": "tsc -p . && vite build",
+        "build": "tsc -p . && vite build --base /nlcts/",
         "preview": "vite preview",
         "ghpages": "npx gh-pages -d dist"
     },

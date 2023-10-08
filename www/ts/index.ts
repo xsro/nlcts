@@ -91,7 +91,7 @@ let simulation_index=0;
 
         Plotly.newPlot('inspector', plot_data, layout);
     },
-    realtime?opt.tstep*1000:undefined)
+    realtime?opt.tstep*1000:0)
 };
 
 (window as any).simulation_stop=function(){

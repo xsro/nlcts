@@ -27,9 +27,14 @@
 
 <body>
   <script type="module" src="./ts/index.ts">  </script>
+  
+  <h1>ODE playground</h1>
+  <p>ode equation defined on the right editor will be simulated with rk4 method </p>
+  
   <button type="button" onclick="simulation_run(false)">simulate(fast)</button>
   <button type="button" onclick="simulation_run(true)">simulate(real time)</button>
   <button type="button" onclick="simulation_stop()">stop</button>
+
   <div id="inspector"></div>
   <div id="editor"></div>
 

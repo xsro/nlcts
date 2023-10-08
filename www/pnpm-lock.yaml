@@ -1,10 +1,5 @@
 lockfileVersion: '6.0'
 
-dependencies:
-  masweb:
-    specifier: 'link:'
-    version: 'link:'
-
 devDependencies:
   '@types/chroma-js':
     specifier: ^2.4.0
